@@ -1,0 +1,11 @@
+.navbar{
+    padding: 0 50px;
+    justify-content: space-between;
+    height: 100px;
+    background-color: #00000061;
+    // opacity: 0.6;
+    .nav-link, .navbar-brand{
+        color: white;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,19 @@
+Task da Fare:
+
+-Controlli sui post in base all'utente loggato. FINITO
+-Solo il proprietario del profilo puo modificarsi. FINITO
+-Solo il proprietario del profilo può eliminarsi. FINITO
+-Se l'utente è stato eliminato, eliminare automaticamente i suoi post. FINITO (MIGLIORATO)
+
+
+-Cookie autologout da perfezionare col token
+-Provare expiresIn (controller auth.js)
+
+
+
+-controllare rotta myposts FATTA
+-getMyInfo unhautorized in profileComponent FATTA
+
+
+-controllare ogni chiamata http con middleware isAuth e
+ cambiarla per verifyToken (passport.js controller)
