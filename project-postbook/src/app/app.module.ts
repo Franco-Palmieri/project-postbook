@@ -14,6 +14,13 @@ import { HomeprivateComponent } from './components/homeprivate/homeprivate.compo
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { postsReducer } from './state/reducers/post.reducers';
+import { ROOT_REDUCERS } from './state/app.state';
+import { CardComponent } from './components/card/card.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +29,16 @@ import { ProfileComponent } from './components/profile/profile.component';
     LoginComponent,
     SignupComponent,
     HomeprivateComponent,
-    ProfileComponent
+    ProfileComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({ name: 'Test' })
   ],
   providers: [
     AuthGuard,
