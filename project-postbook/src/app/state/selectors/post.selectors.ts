@@ -26,5 +26,5 @@ export const selectLoading = createSelector(
 
 export const selectPost = createSelector(
   selectPostsFeature,
-  (state: PostState) => state.singlePost
+  (state: PostState) => state.post
 );

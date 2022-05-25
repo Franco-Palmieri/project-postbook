@@ -1,10 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { PostState } from 'src/app/model/post.states';
-import { loadedPost, loadedPosts, loadPosts } from '../actions/post.actions';
+import { loadSinglePost, loadedSinglePost, loadedPosts, loadPosts } from '../actions/post.actions';
 
 
 //Stato Iniziale
-export const initialState: PostState = {loading: false, posts: [], singlePost: {_userId: '', title: '', body: ''} }
+export const initialState: PostState = {loading: false, posts: [], post: { id:'',_userId: '', title: '', body: ''} }
 
 //lo state fa riferimento allo stato iniziale
 //Il postsReducer si vincolerà con lo store nell'appModule
@@ -18,9 +18,13 @@ export const postsReducer = createReducer(
         return {...state, loading: false, posts} //...state crea un nuovo stato clonato
     }),
 
-    on(loadedPost, (state, {post}) => {
+    on(loadSinglePost, (state) => {
+        return {...state}
+    }),
+
+    on(loadedSinglePost, (state, {post}) => {
         return {...state, post}
-    })
+    }),
     
 );
 

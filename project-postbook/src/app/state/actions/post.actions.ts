@@ -11,7 +11,13 @@ export const loadedPosts = createAction(
     props<{ posts: Post[] }>()
 );
 
-export const loadedPost = createAction(
-    '[Post] Loaded success',
+export const loadSinglePost = createAction(
+    '[SinglePost] Load SinglePost',
+    props<{id: String}>()
+
+);
+
+export const loadedSinglePost = createAction(
+    '[SinglePost] Loaded success',
     props<{ post: Post }>()
 );

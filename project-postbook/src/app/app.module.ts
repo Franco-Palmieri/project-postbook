@@ -20,6 +20,8 @@ import { environment } from '../environments/environment';
 import { postsReducer } from './state/reducers/post.reducers';
 import { ROOT_REDUCERS } from './state/app.state';
 import { CardComponent } from './components/card/card.component';
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from './state/effects/posts.effects';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { CardComponent } from './components/card/card.component';
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(ROOT_REDUCERS),
-    StoreDevtoolsModule.instrument({ name: 'Test' })
+    StoreDevtoolsModule.instrument({ name: 'Test' }),
+    EffectsModule.forRoot([PostEffects])
   ],
   providers: [
     AuthGuard,
