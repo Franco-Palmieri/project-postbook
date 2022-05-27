@@ -16,8 +16,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { postsReducer } from './state/reducers/post.reducers';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ROOT_REDUCERS } from './state/app.state';
 import { CardComponent } from './components/card/card.component';
 import { EffectsModule } from '@ngrx/effects';
@@ -39,6 +38,7 @@ import { PostEffects } from './state/effects/posts.effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'Test' }),
     EffectsModule.forRoot([PostEffects])

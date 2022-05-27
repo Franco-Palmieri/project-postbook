@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Post } from 'src/app/model/post.model';
-import { PostState } from 'src/app/model/post.states';
-import { PostService } from 'src/app/services/post.service';
 import { loadedPosts, loadPosts } from 'src/app/state/actions/post.actions';
 import { AppState } from 'src/app/state/app.state';
-import { selectListPosts, selectLoading } from 'src/app/state/selectors/post.selectors';
-import * as postSelectors from './../../state/selectors/post.selectors';
+
 @Component({
   selector: 'app-homeprivate',
   templateUrl: './homeprivate.component.html',
@@ -17,7 +13,9 @@ export class HomeprivateComponent implements OnInit {
 
   loading$: Observable<boolean> = new Observable()
 
-  constructor( private store: Store<AppState>) { }
+  constructor( 
+    private store: Store<AppState>
+    ) { }
 
   ngOnInit(): void {
     //this.store.dispatch(loadPosts())//Qui comincia tutto, spara l'action

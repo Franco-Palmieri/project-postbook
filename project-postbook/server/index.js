@@ -16,7 +16,7 @@ conectDB()
 app.use(cors())
 // app.use(cors({origin: true, credentials: true, methods: 'POST, GET, PUT, OPTIONS, DELETE'}));
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: false }));
 
 app.use(session({ 
   secret: 'TOP_SECRET',

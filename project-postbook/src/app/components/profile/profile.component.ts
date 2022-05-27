@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { loadMyPosts, loadSinglePost, postNewPost } from 'src/app/state/actions/post.actions';
+import { selectListPosts, selectPost } from 'src/app/state/selectors/post.selectors';
+import { Form, FormBuilder, FormGroup } from '@angular/forms'
+import { Post } from 'src/app/model/post.model';
 import { PostService } from 'src/app/services/post.service';
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,33 +14,69 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class ProfileComponent implements OnInit {
 
-  myPosts: any = [];
-  post: any;
+  // newPost: Post = {} as Post;
   
-  constructor(public postService: PostService, public auth: AuthService) { }
+  myPosts$: Observable<any> = new Observable();
+  postForm: FormGroup;
+  status: boolean = false;
+  currentPost$: Observable<any> = new Observable();
+  coso: any;
+
+  constructor(
+      public auth: AuthService,
+      public store: Store<any>,
+      public fb: FormBuilder,
+      public postService: PostService
+  ) {  
+      this.postForm = this.fb.group({
+        title: [''],
+        body: ['']
+      })
+    }
 
   ngOnInit(): void {
     this.downloadMyPosts();
   }
 
-
-  getMyInfo(){
-    this.auth.getMyInfo().subscribe(res => {
-      console.log(res)
-    })
+  modaleStatus(){
+    this.status = !this.status
+    
   }
 
   downloadMyPosts(){
-    this.postService.getMyPosts().subscribe(res => {
-      this.myPosts = res;
-    })
+    this.store.dispatch(loadMyPosts());
+    this.myPosts$ = this.store.select(selectListPosts);
   }
 
   getPost(id: any){
-    console.log(id)
-    this.postService.getPost(id).subscribe(res=> {
-      this.post = res;
-    })
+    this.store.dispatch({type: loadSinglePost.type, payload: {id: id}});
+    this.currentPost$ = this.store.select(selectPost);
+    this.modaleStatus();
+  }
+
+  addPost(){
+    const newPost: Post = {
+      title: this.postForm.value.title,
+      body: this.postForm.value.body,
+    } as Post;
+    // this.newPost.title = this.postForm.value.title;
+    // this.newPost.body = this.postForm.value.body;
+    this.store.dispatch({type: postNewPost.type, payload: {post: newPost}});
+    this.downloadMyPosts();
+    this.postForm.reset();
+    // this.postService.postNewPost(newPost).subscribe(res => {
+    //   this.downloadMyPosts();
+    //   this.postForm.reset();
+    // })
+  }
+
+
+  downloadPost(){
+    // return this.currentPost$ = this.store.select(selectPost);
+  }
+  
+  editPost(post: any){
+
   }
 
 }

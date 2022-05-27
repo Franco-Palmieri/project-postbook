@@ -27,6 +27,26 @@ export class PostEffects {
       ))
     )
   );
+  
+  loadMyPosts$ = createEffect(() => this.actions$.pipe(
+    ofType('[Post List] Load Myposts'),
+    mergeMap(() => this.postService.getMyPosts()
+      .pipe(
+        map(posts => ({ type:  '[MyPost List] Loaded success', posts })),
+        catchError(() => EMPTY)
+      ))
+    )
+  );
+
+  addNewPost$ = createEffect(() => this.actions$.pipe(
+    ofType('[Post Add] Add NewPosts'),
+    mergeMap((action: {payload:Post}) => this.postService.postNewPost(action.payload)
+      .pipe(
+        map(posts => ({ type:  '[Post Added] Retrieve Post success', posts })),
+        catchError(() => EMPTY)
+      ))
+    )
+  );
 
   constructor(
     private actions$: Actions,

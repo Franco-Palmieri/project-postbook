@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { PostService } from 'src/app/services/post.service';
 import { loadSinglePost } from 'src/app/state/actions/post.actions';
 import { AppState } from 'src/app/state/app.state';
 import { selectListPosts, selectPost } from 'src/app/state/selectors/post.selectors';
