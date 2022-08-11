@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { loadedPosts, loadPosts } from 'src/app/state/actions/post.actions';
+import * as PostActions from 'src/app/state/actions/post.actions';
 import { AppState } from 'src/app/state/app.state';
 
 @Component({
@@ -32,7 +32,7 @@ export class HomeprivateComponent implements OnInit {
   //   }) 
   // }
   downloadPosts(){
-    this.store.dispatch(loadPosts());
+    this.store.dispatch({type: PostActions.loadPosts.type});
   }
 
  

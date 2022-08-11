@@ -7,19 +7,19 @@ export const loadPosts = createAction(
     '[Post List] Load posts', 
 );
 
-export const loadedPosts = createAction(
+export const loadPostsSuccess = createAction(
     '[Post List] Loaded success',
     props<{ posts: Post[] }>()
 );
 
 //Action per far partire la richiesta GetPost
 export const loadSinglePost = createAction(
-    '[SinglePost] Load SinglePost',
+    '[Post List] Load SinglePost',
     props<{id: String}>()
 );
 
-export const loadedSinglePost = createAction(
-    '[SinglePost] Loaded success',
+export const loadSinglePostSuccess = createAction(
+    '[Post List] Loaded success',
     props<{ post: Post }>()
 );
 
@@ -28,18 +28,18 @@ export const loadMyPosts = createAction(
     '[Post List] Load Myposts', 
 );
 
-export const loadedMyPosts = createAction(
-    '[MyPost List] Loaded success',
+export const loadMyPostsSuccess = createAction(
+    '[Post List] Loaded success',
     props<{ posts: Post[] }>()
 );
 
-//Action per far partire la richiesta PostNewPost
-export const postNewPost = createAction(
-    '[Post Add] Add NewPosts', 
+//Action per far partire la richiesta AddNewPost
+export const addNewPost = createAction(
+    '[Post List] Add NewPosts', 
     props<{ post: Post }>()
 );
 
-export const retrievedPostList = createAction(
-    '[Post Added] Retrieve Post success',
+export const addNewPostSuccess = createAction(
+    '[Post List] Retrieve Post success',
     props<{ posts: Post[] }>()
 );

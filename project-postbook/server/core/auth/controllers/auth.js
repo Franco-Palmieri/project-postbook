@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 
 exports.postSignup = (req, res, next) =>{
-
-    const new_user = {...req.body};
+    let new_user = new User({...req.body});
+    // this.new_user = {...req.body};
 
     User.findOne({email: req.body.email}, (err, userExist)=>{
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { loadMyPosts, loadSinglePost, postNewPost } from 'src/app/state/actions/post.actions';
+import * as PostActions  from 'src/app/state/actions/post.actions';
 import { selectListPosts, selectPost } from 'src/app/state/selectors/post.selectors';
 import { Form, FormBuilder, FormGroup } from '@angular/forms'
 import { Post } from 'src/app/model/post.model';
@@ -44,12 +44,12 @@ export class ProfileComponent implements OnInit {
   }
 
   downloadMyPosts(){
-    this.store.dispatch(loadMyPosts());
+    this.store.dispatch({type: PostActions.loadMyPosts.type});
     this.myPosts$ = this.store.select(selectListPosts);
   }
 
   getPost(id: any){
-    this.store.dispatch({type: loadSinglePost.type, payload: {id: id}});
+    this.store.dispatch({type: PostActions.loadSinglePost.type, payload: {id: id}});
     this.currentPost$ = this.store.select(selectPost);
     this.modaleStatus();
   }
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
     } as Post;
     // this.newPost.title = this.postForm.value.title;
     // this.newPost.body = this.postForm.value.body;
-    this.store.dispatch({type: postNewPost.type, payload: {post: newPost}});
+    this.store.dispatch({type: PostActions.addNewPost.type, payload: {post: newPost}});
     this.downloadMyPosts();
     this.postForm.reset();
     // this.postService.postNewPost(newPost).subscribe(res => {
