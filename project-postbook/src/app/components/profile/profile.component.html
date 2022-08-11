@@ -9,7 +9,7 @@
   </div>
   <div class="container-inner">
     <div *ngFor="let post of myPosts$ | async">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;" (click)="getPost(post._id)">
+      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;" (click)="getPost(post)">
         <div class="card-header">Header</div>
         <div class="card-body">
           <h5 class="card-title">{{post.title}}</h5>

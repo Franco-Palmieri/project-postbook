@@ -15,7 +15,7 @@ export const loadPostsSuccess = createAction(
 //Action per far partire la richiesta GetPost
 export const loadSinglePost = createAction(
     '[Post List] Load SinglePost',
-    props<{id: String}>()
+    props<{payload: String}>()
 );
 
 export const loadSinglePostSuccess = createAction(

@@ -30,7 +30,7 @@ exports.getPostsOfUser = async (req, res) =>{
 exports.postPost = async (req, res) => {
 
     try {
-        // console.log(req.body, 'BODYYYYYYYYY')
+        console.log(req.body, 'BODYYYYYYYYY')
         let post = new Post(req.body.post);
         let user = await User.findById(req.user);
 
@@ -90,7 +90,6 @@ exports.putPost = async (req, res) => {
 exports.getPost = async(req, res) => {
 
     try {
-
         let post = await Post.findById(req.params.id);
         res.json(post);
 

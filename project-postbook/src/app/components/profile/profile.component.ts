@@ -7,6 +7,7 @@ import { selectListPosts, selectPost } from 'src/app/state/selectors/post.select
 import { Form, FormBuilder, FormGroup } from '@angular/forms'
 import { Post } from 'src/app/model/post.model';
 import { PostService } from 'src/app/services/post.service';
+import { AppState } from 'src/app/state/app.state';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,9 +15,9 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class ProfileComponent implements OnInit {
 
-  // newPost: Post = {} as Post;
-  
-  myPosts$: Observable<any> = new Observable();
+  newPost: Post = {} as Post;
+
+  myPosts$ = this.store.select(selectListPosts);
   postForm: FormGroup;
   status: boolean = false;
   currentPost$: Observable<any> = new Observable();
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
       public auth: AuthService,
-      public store: Store<any>,
+      public store: Store<AppState>,
       public fb: FormBuilder,
       public postService: PostService
   ) {  
@@ -36,38 +37,31 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.downloadMyPosts();
+    console.log(this.myPosts$)
   }
 
   modaleStatus(){
     this.status = !this.status
-    
   }
 
   downloadMyPosts(){
     this.store.dispatch({type: PostActions.loadMyPosts.type});
-    this.myPosts$ = this.store.select(selectListPosts);
+
   }
 
-  getPost(id: any){
-    this.store.dispatch({type: PostActions.loadSinglePost.type, payload: {id: id}});
+  getPost(post: any){
+    console.log(post._id)
+    this.store.dispatch({type: PostActions.loadSinglePost.type, payload: {id: post._id}});
     this.currentPost$ = this.store.select(selectPost);
     this.modaleStatus();
   }
 
   addPost(){
-    const newPost: Post = {
-      title: this.postForm.value.title,
-      body: this.postForm.value.body,
-    } as Post;
-    // this.newPost.title = this.postForm.value.title;
-    // this.newPost.body = this.postForm.value.body;
-    this.store.dispatch({type: PostActions.addNewPost.type, payload: {post: newPost}});
+    this.newPost.title = this.postForm.value.title,
+    this.newPost.body = this.postForm.value.body,
+    this.store.dispatch({type: PostActions.addNewPost.type, payload: {post: this.newPost}});
     this.downloadMyPosts();
     this.postForm.reset();
-    // this.postService.postNewPost(newPost).subscribe(res => {
-    //   this.downloadMyPosts();
-    //   this.postForm.reset();
-    // })
   }
 
 
